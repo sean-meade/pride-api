@@ -11,7 +11,7 @@ def create_app():
     if os.environ.get('DEVELOPMENT'):
         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
     else:
-        os.environ.get('DATABASE_URL')
+        app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
 
     api.init_app(app)
     db.init_app(app)
