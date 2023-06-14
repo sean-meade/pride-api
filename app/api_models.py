@@ -10,5 +10,5 @@ event_model = api.model("Pride Historical Event", {
     "id": fields.Integer,
     "event": fields.String,
     'date': MyDateFormat,
-    "event_description": fields.String
+    "description": fields.String
 })
