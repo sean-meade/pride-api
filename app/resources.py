@@ -18,3 +18,16 @@ class EventsListAPI(Resource):
     def get(self):
         return Event.query.all()
 
+@ns.route("/events/<int:year>")
+class EventByYear(Resource):
+
+    @ns.marshal_list_with(event_model)
+    def get(self, year):
+        all_events = Event.query.all()
+        events_this_year = []
+        for event in all_events:
+            print(str(event.date)[:4])
+            if str(event.date)[:4] == str(year):
+                events_this_year.append(event)
+
+        return events_this_year
