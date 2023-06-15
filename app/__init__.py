@@ -8,7 +8,7 @@ import os
 def create_app():
     app = Flask(__name__)
 
-    # Define Database
+        # Define Database
     # Use local development sqlite3 db
     if os.environ.get('DEVELOPMENT'):
         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"
