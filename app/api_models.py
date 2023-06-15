@@ -10,7 +10,7 @@ class MyDateFormat(fields.Raw):
 event_model = api.model("Pride Historical Event", {
     'id': fields.Integer,
     'event': fields.String,
-    'date': MyDateFormat,
+    'date': fields.String,
     'country': fields.String,
     'region': fields.String,
     'description': fields.String,
@@ -22,7 +22,7 @@ event_model = api.model("Pride Historical Event", {
 # format for inputting an event (create or edit)
 event_input_model = api.model("EventInput", {
     'event': fields.String,
-    'date': MyDateFormat,
+    'date': fields.String,
     'country': fields.String,
     'region': fields.String,
     'description': fields.String,
