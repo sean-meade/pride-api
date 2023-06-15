@@ -1,6 +1,7 @@
 from flask_restx import Resource, Namespace 
+from datetime import datetime
 
-from .api_models import event_model
+from .api_models import event_model, event_input_model
 from .extensions import db
 from .models import Event
 
@@ -17,6 +18,22 @@ class EventsListAPI(Resource):
     @ns.marshal_list_with(event_model)
     def get(self):
         return Event.query.all()
+    
+    @ns.expect(event_input_model)
+    @ns.marshal_with(event_model)
+    def post(self):
+        
+        event = Event(
+            event = ns.payload["event"],
+            date = datetime.strptime(ns.payload["date"], '%Y-%m-%d'),
+            description = ns.payload["description"],
+            lat = ns.payload["lat"],
+            long = ns.payload["long"]
+        )
+        db.session.add(event)
+        db.session.commit()
+
+        return event, 201
 
 @ns.route("/events/<int:year>")
 class EventByYear(Resource):
