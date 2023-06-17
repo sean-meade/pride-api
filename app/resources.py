@@ -39,19 +39,18 @@ class EventsListAPI(Resource):
         return event, 201
 
 # Route and function for filtering by year
-@ns.route("/events/<int:year>")
-class EventByYear(Resource):
+@ns.route("/events/<str:country>")
+class EventByCountry(Resource):
 
     @ns.marshal_list_with(event_model)
-    def get(self, year):
+    def get(self, country):
         all_events = Event.query.all()
         events_this_year = []
         for event in all_events:
-            print(str(event.date)[:4])
-            if str(event.date)[:4] == str(year):
+            if str(event.date)[:4] == str(country):
                 events_this_year.append(event)
 
-        return events_this_year
+        return events_this_year[0]
 
 # Create route for deleting and editing
 @ns.route("/events/<int:id>")
