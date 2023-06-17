@@ -1,9 +1,9 @@
 from flask_restx import Resource, Namespace 
 from datetime import datetime
 
-from .api_models import event_model, event_input_model
+from .api_models import event_model, event_input_model, contact_model, contact_input_model
 from .extensions import db
-from .models import Event
+from .models import Event, Contact
 
 # Create a namespace (i.e. base_url/api/)
 ns = Namespace("api")
@@ -67,7 +67,6 @@ class EventByYear(Resource):
     @ns.marshal_with(event_model)
     def put(self, id):
         event = Event.query.get(id)
-        event.event = ns.payload["event"]
         event.date = datetime.strptime(ns.payload["date"], '%Y-%m-%d')
         event.country = ns.payload["country"]
         event.region = ns.payload["region"]
@@ -77,3 +76,28 @@ class EventByYear(Resource):
         event.long = ns.payload["long"]
         db.session.commit()
         return event
+
+# create route for seeing all events and adding an event
+@ns.route("/contacts")
+class ContactAPI(Resource):
+    # see all events in db
+    # marshall is to return the format defined in event_model
+    @ns.marshal_list_with(contact_model)
+    def get(self):
+        return Contact.query.all()
+    
+    # Create event in db
+    # expect sets the format of payload expected
+    @ns.expect(contact_input_model)
+    @ns.marshal_with(contact_model)
+    def post(self):
+        
+        contact = Contact(
+            email = ns.payload["email"],
+            country = ns.payload["country"],
+            description = ns.payload["description"],
+        )
+        db.session.add(contact)
+        db.session.commit()
+
+        return contact, 201

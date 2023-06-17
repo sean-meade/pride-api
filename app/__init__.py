@@ -10,7 +10,7 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
 
-        # Define Database
+    # Define Database
     # Use local development sqlite3 db
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
 
