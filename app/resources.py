@@ -39,7 +39,7 @@ class EventsListAPI(Resource):
         return event, 201
 
 # Route and function for filtering by year
-@ns.route("/events/<str:country>")
+@ns.route("/events/<string:country>")
 class EventByCountry(Resource):
 
     @ns.marshal_list_with(event_model)
