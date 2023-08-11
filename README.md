@@ -3,7 +3,7 @@ API to request information, location, and time for historical pride related even
 
 This API services the Out & About website.
 
-Using rest-x it implements swagger to make it easier to interact with. It's hosted on render and is the go between fir a postgresql database (also hosted on render) and the Out and About website.
+Using flask_restx it implements swagger to make it easier to interact with. It's hosted on render and is the go between fir a postgresql database (also hosted on render) and the Out and About website.
 
 Future improvements:
 
