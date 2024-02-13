@@ -1,5 +1,9 @@
 # pride-api
-API to request information, location, and time for historical pride related events throughout history. Used for hackaton project https://github.com/vanderpatrick/Hackteam-6
+API to request information, location, and time for historical pride related events throughout history. 
+
+Link to swagger interface for API: https://pride-api.onrender.com/ 
+
+Used for hackaton project https://github.com/vanderpatrick/Hackteam-6
 
 This API services the Out & About website.
 
